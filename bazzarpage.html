@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skyblock Bazaar scrolls Information</title>
+<style>
+    body {
+        background-image: url("https://lh3.googleusercontent.com/pw/AP1GczNyx4YdXN5pb8mUzgOY6BGvK8Y7rOA6mefXxqrmq2R6NknSxyphyKTwnoZRyAdhuup7yF1bWQ7I_Dfk5znVH5jhawgEaUQpNZt8gk9ww39_aLXIJzA=w2400");
+        background-repeat: no-repeat; 
+        background-size: cover;
+    }
+    .imp {
+        background-color: rgba(0, 0, 0, 0.583);
+        border-radius: 12px;
+        float: left;
+        margin: 2%;
+        width: 29.3%;
+        height: 90vh;
+    }
+    img {
+        float: left;
+        margin-top: 3%;
+        margin-left: 3%;
+        width: 25%; 
+        height: auto;
+        display: block;
+    }
+
+    h1 {
+        color: bisque;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-top: 10%;
+        font-size: 33px;
+        display: block;
+    }
+    .impl {
+        margin-right: 9%;
+    }
+    .SHADOW.WARP {
+        color: rgb(255, 218, 105);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 200%;
+        margin-top: 14%;
+        margin-left: 5%;
+        display: block;
+    }
+    .WITHER.SHIELD {
+        color: rgb(255, 218, 105);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 200%;
+        margin-top: 14%;
+        margin-left: 5%;
+        display: block;
+    }
+    .IMPLOSION.SCROLL {
+        color: rgb(255, 218, 105);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 200%;
+        margin-top: 14%;
+        margin-left: 5%;
+        display: block;
+        
+    }
+    .wit {
+        background-color: rgb(0, 0, 0, 0.583);
+        border-radius: 12px;
+        float: right;
+        margin: 2%;
+        width: 29.3%;
+        height: 90vh;
+    }
+    .shad {
+        background-color: rgba(0, 0, 0, 0.583);
+        border-radius: 12px;
+        float: inline-start;
+        margin: 2%;
+        width: 29.3%;
+        height: 90vh;
+    }
+</style>
+</head>
+<body>
+    <div class="imp">
+        <img class="impl" src="https://lh3.googleusercontent.com/pw/AP1GczN0piF6nedESRv2OwK_g6kGdktdLwW36mDz8ZNnonoAwHM_HX1CkPByBwLVWeqwaKEuY1SxSuriscKiZi1Iv6bGJhMAopfZ2cqxuCoDdGPKZm9pUo8=w2400" alt="">
+        <h1 class="implos">IMPLOSION</h1>
+        <h1 class="IMPLOSION SCROLL"></h1>
+    </div>
+    <div class="wit">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczN_EY0mPZT-n2ESi6LGeYI6XBVQroyoC26Wc5NqPetXsYf5UPyXZnjOYD2Z0U3sJWzkWFxkrA0HwbVXMAujgjl_rud-L0_UPDhRZ8Y0bF9Z6L3KEO4=w2400" alt="">
+        <h1>WITHER SHIELD</h1>
+        <h1 class="WITHER SHIELD"></h1>
+    </div>
+    <div class="shad">
+        <img src="https://lh3.googleusercontent.com/pw/AP1GczOAxDo_WTEugTvGDH-nFRsBSUuFJW-o6Accnf-20J5IYlpW-0C4jcec_HgbNHn3EeJ-YSs4XrlltwGh-ymzNsZGR2HJjNy_6kEktDZDhxuVSVPs5kw=w2400" alt="">
+        <h1>SHADOW WARP</h1>
+        <h1 class="SHADOW WARP"></h1>
+    </div>
+
+    <script>
+        function formatNumber(number) {
+            if (number >= 1000000000) {
+                return (number / 1000000000).toFixed(1) + 'B';
+            } else if (number >= 1000000) {
+                return (number / 1000000).toFixed(1) + 'M';
+            } else if (number >= 1000) {
+                return (number / 1000).toFixed(1) + 'K';
+            } else {
+                return number;
+            }
+        }
+
+        function getInfo() {
+            var url = "https://api.hypixel.net/v2/skyblock/bazaar";
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var variableName = "products";
+                    var IMP = "IMPLOSION_SCROLL";
+                    var shadow = "SHADOW_WARP_SCROLL";
+                    var wither = "WITHER_SHIELD_SCROLL";
+                    var status = "quick_status";
+                    var buyPrice = "buyPrice";
+
+                    if (variableName in data) {
+                        var productsData = data[variableName];
+                        
+                        if (IMP in productsData) {
+                            var inImp = productsData[IMP];
+                            if (status in inImp && buyPrice in inImp[status]) {
+                                document.querySelector('.IMPLOSION.SCROLL').innerHTML = `Price: ${formatNumber(inImp[status][buyPrice])}`;
+                            }
+                        }
+
+                        if (shadow in productsData) {
+                            var inShadow = productsData[shadow];
+                            if (status in inShadow && buyPrice in inShadow[status]) {
+                                document.querySelector('.SHADOW.WARP').innerHTML = `Price: ${formatNumber(inShadow[status][buyPrice])}`;
+                            }
+                        }
+
+                        if (wither in productsData) {
+                            var inWither = productsData[wither];
+                            if (status in inWither && buyPrice in inWither[status]) {
+                                document.querySelector('.WITHER.SHIELD').innerHTML = `Price: ${formatNumber(inWither[status][buyPrice])}`;
+                            }
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        getInfo();
+    </script>
+</body>
+</html>
